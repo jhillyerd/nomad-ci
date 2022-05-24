@@ -3,12 +3,15 @@ job "ci-dispatch" {
   type = "batch"
 
   parameterized {
-    meta_required = ["repository_url"]
+    meta_required = [
+      "docker_image",
+      "repository_url"
+    ]
+    meta_optional = ["repo_name"]
     payload = "required"
   }
 
   meta {
-    repository_url = "unspecified"
     repo_name = "repo-root"
   }
 
@@ -19,7 +22,7 @@ job "ci-dispatch" {
       driver = "docker"
 
       config {
-        image = "golang:1.18"
+        image = "${NOMAD_META_docker_image}"
 
         command = "/bin/bash"
         args = ["${NOMAD_TASK_DIR}/control-script.bash"]
