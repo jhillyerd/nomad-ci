@@ -1,5 +1,5 @@
-job "ci-dispatch" {
-  datacenters = ["skynet"]
+job "nomad-ci" {
+  datacenters = ["dc1"]
   type = "batch"
 
   parameterized {
@@ -15,10 +15,10 @@ job "ci-dispatch" {
     repo_name = "repo-root"
   }
 
-  group "ci-test" {
+  group "nomad-ci" {
     count = 1
 
-    task "ci-test" {
+    task "nomad-ci" {
       driver = "docker"
 
       config {

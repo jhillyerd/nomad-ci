@@ -4,4 +4,4 @@ nomad job dispatch \
   -meta repository_url="https://github.com/jhillyerd/enmime.git" \
   -meta repo_name="enmime" \
   -meta docker_image="golang:1.18" \
-  ci-dispatch ./sample-ci-script.bash
+  nomad-ci ./sample-ci-script.bash
