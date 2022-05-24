@@ -1,6 +1,10 @@
-job "ci-test-batch" {
+job "ci-dispatch" {
   datacenters = ["skynet"]
   type = "batch"
+
+  parameterized {
+    payload = "required"
+  }
 
   group "ci-test" {
     count = 1
@@ -10,8 +14,14 @@ job "ci-test-batch" {
 
       config {
         image = "golang:1.18"
-        command = "/bin/echo"
-        args = ["hello", "world"]
+        volumes = [ "local:/job" ]
+
+        command = "/bin/bash"
+        args = ["/job/local/ci-script.bash"]
+      }
+
+      dispatch_payload {
+        file = "local/ci-script.bash"
       }
 
       resources {
