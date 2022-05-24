@@ -1,0 +1,5 @@
+#!/bin/sh
+
+nomad job dispatch \
+  -meta repository_url="https://github.com/jhillyerd/enmime.git" \
+  ci-dispatch ./ci-script.sh
